@@ -17,61 +17,28 @@
     <div class="wrapper p-3 bg-white text-center">
         <!-- Header -->
         <div class="container mt-2 mb-2">
-            <h1 class="mb-3 text-warning display-3">Quiz</h1>
+            <h1 class="mb-3 text-warning display-6">Vem är detta?</h1>
         </div>
 
         <!-- Här är själva spelet -->
-        <div class="quiz py-3 bg-warning">
+        <div class="quiz py-3 bg-white">
             <div class="container">
-                <h2 class="my-2 text-black">Testa om du kan namnen på dina klasskamrater!</h2>
-
-                <form action="" class="quiz-form text-white">
-                    <div class="my-2">
-                        <h3>Vem är detta?</h3>
-
-                    <!-- alternativ 1 -->
-                        <div class="form-check my-2 text-black">
-                            <input type="radio" name="question1" id="option1">
-                        <!-- Här nedan i label-tagg kommer alternativ 1 från array -->    
-                            <label class="form-check-label">Här kommer alternativ 1 från arrayn.</label>
-                        </div> <!-- slut på alternativ 1 -->
-
-                    <!-- alternativ 2 -->
-                        <div class="form-check my-2 text-black">
-                            <input type="radio" name="question1" id="option2">
-                        <!-- Här nedan i label-tagg kommer alternativ 2 från array -->    
-                            <label class="form-check-label">Här kommer alternativ 2 från arrayn.</label>
-                        </div> <!-- slut på alternativ 2 -->
-
-                        <!-- alternativ 3 -->
-                        <div class="form-check my-2 text-black">
-                            <input type="radio" name="question1" id="option3">
-                        <!-- Här nedan i label-tagg kommer alternativ 3 från array -->    
-                            <label class="form-check-label">Här kommer alternativ 3 från arrayn.</label>
-                        </div> <!-- slut på alternativ 3 -->
-
-                        <!-- alternativ 4 -->
-                        <div class="form-check my-2 text-black">
-                            <input type="radio" name="question1" id="option4">
-                        <!-- Här nedan i label-tagg kommer alternativ 4 från array -->    
-                            <label class="form-check-label">Här kommer alternativ 4 från arrayn.</label>
-                        </div> <!-- slut på alternativ 4 -->
-
-                    </div> <!-- Här slutar diven som har marginal my-2 -->
-
-                    <!-- Knapp som visar resultat -->
-                    <div class="text-center">
-                        <input type="text" class="submit btn btn-light ">
+                <!-- card som visar bild på klasskamrat med 4 svarsalternativ -->
+                <div class="card my-2">
+                    <img class="studentImg" src="" alt="image of classmate">
+                    <div class="buttonContainer">
+                            
+                                
                     </div>
+                </div>
 
-                    <!-- Här visas resultatet. Är satt till display-none som default. Visas bara när man spelat klart. -->
-                    <div class="result d-none text-center">
-                        <div class="container">
-                            <p>Här visas resultatet</p>
-                        </div>
+                <!-- Här visas resultatet. Är satt till display-none som default. Visas bara när man spelat klart. -->
+                <div class="result d-none text-center">
+                    <div class="container">
+                        <p>Här visas resultatet</p>
                     </div>
+                </div>
 
-                </form> <!-- Här slutar formuläret -->
             </div> <!-- Här slutar container-diven -->
         </div> <!-- Här slutar diven med classen quiz -->
 
