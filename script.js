@@ -3,7 +3,7 @@
 */
 //const cardEl = document.querySelector('.card');
 const buttonContainerEl = document.querySelector('.buttonContainer');
-const result = document.querySelector('.result');
+const resultEl = document.querySelector('.result');
 const studentImgEl = document.querySelector('.studentImg');
 const cardEl = document.querySelector('.card');
 
@@ -178,12 +178,14 @@ const shuffleArray = (array) => {
 	}
 };
 
+let correctStudent = "";
+
 const getClassmates = () => {
 	shuffleArray(students); // kallar på funktionen shuffleArray som gör att alla studenter blandas och jag får en ny varje gång. 
 
 	const randomStudents = students.slice(0,4); // Jag klipper ut de 4 första studenterna i arrayn "students" med hjälp av slice. Då får jag ut de studenter som är på index 0-4. Dessa sparar jag i "randomStudents".
 
-	const correctStudent = students[0]; // efter att jag shufflat alla studenter så sätter jag correctStudent till den är som är på index 0 i arrayn student
+	correctStudent = students[0]; // efter att jag shufflat alla studenter så sätter jag correctStudent till den är som är på index 0 i arrayn student
 
 	studentImgEl.src = "students/" + correctStudent.image; // i diven som heter studentImg så har jag en tom src. Med denna koden så skriver jag in sökvägen till correctStudents bild. 
 
@@ -199,6 +201,12 @@ const getClassmates = () => {
 		`;
 	});
 };
+
+// funktion för att hämta ut resultatet
+const getResult = () => {
+	
+};
+
 /////////////////// Här börjar spelet! ///////////////
 
 getClassmates();
@@ -207,10 +215,23 @@ let guesses = 0; // jag sätter gissningarna till 0 som default
 
 // jag sätter en eventlistenet på min div som heter "buttonContainer" och lyssnar efter click på BUTTON
 buttonContainerEl.addEventListener('click', e => {
+	
 	if (e.target.tagName === "BUTTON") {
-		guesses++;
-	};
-		if ()
+		guesses++
 
+		// if-sats som kollar om gissningen är rätt eller fel
+		if (e.target.innerText === correctStudent.name) {
+			resultEl.innerText = 'Rätt!';
+		} else {
+			resultEl.innerText = 'Fel';
+		} 	
+
+		// if-sats som kollar om spelet ska fortsätta eller avslutas. En spelomgång är 10 bilder och så länge man inte kommit till bild nummer 10 så ska spelet fortsätta, annars ska spelet avslutas och resultatet ska visas. 
+		if (guess === 10) {
+			getResult();
+		} else {
+			getClassmates();
+		}
+	};
 });
 
