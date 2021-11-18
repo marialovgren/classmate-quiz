@@ -181,13 +181,11 @@ const shuffleArray = (array) => {
 const getClassmates = () => {
 	shuffleArray(students); // kallar på funktionen shuffleArray som gör att alla studenter blandas och jag får en ny varje gång. 
 
+	const randomStudents = students.slice(0,4); // Jag klipper ut de 4 första studenterna i arrayn "students" med hjälp av slice. Då får jag ut de studenter som är på index 0-4. Dessa sparar jag i "randomStudents".
+
 	const correctStudent = students[0]; // efter att jag shufflat alla studenter så sätter jag correctStudent till den är som är på index 0 i arrayn student
 
-	
 	studentImgEl.src = "students/" + correctStudent.image; // i diven som heter studentImg så har jag en tom src. Med denna koden så skriver jag in sökvägen till correctStudents bild. 
-
-
-	const randomStudents = students.slice(0,4); // Jag klipper ut de 4 första studenterna i arrayn "students" med hjälp av slice. Då får jag ut de studenter som är på index 0-4. Dessa sparar jag i "randomStudents".
 
 	shuffleArray(randomStudents); // jag kallar på shuffleArray igen för att placeringen av namnen ska vara random till varje bild. 
 
@@ -201,11 +199,18 @@ const getClassmates = () => {
 		`;
 	});
 };
+/////////////////// Här börjar spelet! ///////////////
 
 getClassmates();
 
+let guesses = 0; // jag sätter gissningarna till 0 som default
 
+// jag sätter en eventlistenet på min div som heter "buttonContainer" och lyssnar efter click på BUTTON
 buttonContainerEl.addEventListener('click', e => {
+	if (e.target.tagName === "BUTTON") {
+		guesses++;
+	};
+		if ()
 
 });
 
