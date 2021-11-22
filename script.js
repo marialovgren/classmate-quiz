@@ -206,18 +206,22 @@ const getClassmates = () => {
 //? funktion för att hämta ut resultatet
 //! stil i css-fil som sätter result till display none som default
 
-const getResult = (result) => {
-	resultEl.innerHTML = `<p>Ditt resultat är: ${result}</p>`
+const getResult = () => {
+	
+	
+	resultEl.innerHTML = `<p>Du fick ${correctGuess} rätt och ${wrongGuess} fel.</p>`
 
-	resultWrapperEl.classList.add("show");
+	
 };
 
 // * HÄR BÖRJAR SPELET 
 
 getClassmates();
 
-let guesses = 0; // jag sätter gissningarna till 0 som default
+// jag sätter gissningarna till 0 som default. 
+let guesses = 0; 
 let correctGuess = 0;
+let wrongGuess = 0;
 
 // jag sätter en eventlistenet på min div som heter "buttonContainer" och lyssnar efter click på BUTTON
 buttonContainerEl.addEventListener('click', e => {
@@ -226,15 +230,20 @@ buttonContainerEl.addEventListener('click', e => {
 		guesses++
 		
 		if (e.target.innerText === correctStudent.name) {
-			correctGuess++
+			correctGuess++ 
 		}
 			
 		// if-sats som kollar om gissningen är rätt eller fel. if-sats som kollar om spelet ska fortsätta eller avslutas. En spelomgång är 10 bilder och så länge man inte kommit till bild nummer 10 så ska spelet fortsätta, annars ska spelet avslutas och resultatet ska visas. 
 		if (guesses === 10) {
-			getResult();
+			wrongGuess = guesses - correctGuess;
+			resultWrapperEl.classList.add("show");
+			
+			resultEl.innerHTML = `
+			<button onclick="getResult()" class="btn btn-dark text-warning my-2">
+				Visa resultat
+			</button>`;
 		} else {
 			getClassmates();
 		} 
 	};
 });
-
