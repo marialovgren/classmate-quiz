@@ -2,11 +2,10 @@
 * Inlämningsuppgift gjord av Maria Lövgren FED21M
 */
 
-const buttonContainerEl = document.querySelector('.buttonContainer');
 const studentImgEl = document.querySelector('.studentImg');
+const buttonContainerEl = document.querySelector('.buttonContainer');
 const resultEl = document.querySelector('.result');
 const resultWrapperEl = document.querySelector('.resultWrapper');
-
 
 const students = [
 	{
@@ -167,7 +166,7 @@ const students = [
 	},
 ];
 
-
+// funktion som jag kallar på för att slumpa fram något
 const shuffleArray = (array) => {
 	for (let i = array.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
@@ -177,16 +176,22 @@ const shuffleArray = (array) => {
 	}
 };
 
-let correctStudent = "";
+// jag sätter gissningarna till 0 som default. 
+let guesses = 0; 
+let correctGuess = 0;
+let wrongGuess = 0;
 
+let correctStudent = ""; // correctStudent är satt till en tom sträng för att jag sedan ska kunna tilldela den ett nytt värde vid behov 
+
+// denna funktionen kallar jag på när jag vill generera en ny bild och 4 namn
 const getClassmates = () => {
 	buttonContainerEl.innerHTML = ""; // gör så att det bara är 4 namn till varja bild. Utan denna så hade det annars adderats 4 namn till listan varje gång jag kallar på getClassmates()
 
-	shuffleArray(students); // kallar på funktionen shuffleArray som gör att alla studenter blandas och jag får en ny varje gång. 
+	shuffleArray(students); // kallar på funktionen shuffleArray som gör att alla studenter blandas och jag får en ny version av students varje gång. 
 
-	const randomStudents = students.slice(0,4); // Jag klipper ut de 4 första studenterna i arrayn "students" med hjälp av slice. Då får jag ut de studenter som är på index 0-4. Dessa sparar jag i "randomStudents".
+	const randomStudents = students.slice(0,4); // Jag tar ut de 4 första studenterna i arrayn "students" med hjälp av slice. Då får jag ut de studenter som är på index 0-4. Dessa sparar jag i "randomStudents".
 
-	correctStudent = students[0]; // efter att jag shufflat alla studenter så sätter jag correctStudent till den är som är på index 0 i arrayn student
+	correctStudent = students[0]; // efter att jag blandat alla studenter så sätter jag correctStudent till den är som är på index 0 i arrayn student
 
 	studentImgEl.src = "students/" + correctStudent.image; // i diven som heter studentImg så har jag en tom src. Med denna koden så skriver jag in sökvägen till correctStudents bild. 
 
@@ -194,6 +199,7 @@ const getClassmates = () => {
 
 	const randomNames = randomStudents.map(students => students.name); // med map så väljer jag att plocka ut de 4 namnen som jag spararat i randomStudents och spara dessa i en ny constant som heter randomNames
 
+	// för varje student i randomNames så läggs en knapp till med deras namn
 	randomNames.forEach(student => {
 		buttonContainerEl.innerHTML += `
 			<button class="btn btn-dark text-warning my-2">
@@ -203,47 +209,54 @@ const getClassmates = () => {
 	});
 };
 
-//? funktion för att hämta ut resultatet
-//! stil i css-fil som sätter result till display none som default
-
+// funktion för att hämta ut resultatet
 const getResult = () => {
-	
-	
-	resultEl.innerHTML = `<p>Du fick ${correctGuess} rätt och ${wrongGuess} fel.</p>`
-
-	
+	resultEl.innerHTML = `<p>Du fick ${correctGuess} rätt och ${wrongGuess} fel.</p><br> 
+	<button onclick="playAgain()" class="btn btn-dark text-warning my-2">
+				Spela igen
+			</button>`;  
 };
+
+// funktion som startar en ny spelomgång
+const playAgain = () => {
+	resultEl.innerHTML = ""; // tömmer innehåller i resultat-delen
+	guesses = 0; // tömmer räknaren
+
+	getClassmates(); // kallar på funktionen som skapar bild och 4 namn
+}
 
 // * HÄR BÖRJAR SPELET 
 
 getClassmates();
 
-// jag sätter gissningarna till 0 som default. 
-let guesses = 0; 
-let correctGuess = 0;
-let wrongGuess = 0;
+resultEl.innerHTML = ""; // tömmer platsen där resultatet ska visas så att när man klickar på "spela igen" så försvinner resultatet.
 
-// jag sätter en eventlistenet på min div som heter "buttonContainer" och lyssnar efter click på BUTTON
+
+
+
+// jag sätter en eventlistener på min div som heter "buttonContainer" och lyssnar efter click på BUTTON
 buttonContainerEl.addEventListener('click', e => {
 	
 	if (e.target.tagName === "BUTTON") {
-		guesses++
+		guesses++ 
 		
 		if (e.target.innerText === correctStudent.name) {
-			correctGuess++ 
+			correctGuess++ // räknare som ökar correctStudents varje gång man gissar rätt. 
 		}
 			
-		// if-sats som kollar om gissningen är rätt eller fel. if-sats som kollar om spelet ska fortsätta eller avslutas. En spelomgång är 10 bilder och så länge man inte kommit till bild nummer 10 så ska spelet fortsätta, annars ska spelet avslutas och resultatet ska visas. 
+		// En spelomgång är 10 bilder. Om man kommit till bild 10 så ska en knapp med "visa resultat" komma upp. 
 		if (guesses === 10) {
-			wrongGuess = guesses - correctGuess;
+			wrongGuess = guesses - correctGuess; // uträkning för att få fram antalet felgissningar
 			resultWrapperEl.classList.add("show");
 			
+			// när man klickar på "visa resultat" så kallar jag på funktionen getResult() med hjälp av onclick
 			resultEl.innerHTML = `
 			<button onclick="getResult()" class="btn btn-dark text-warning my-2">
 				Visa resultat
 			</button>`;
 		} else {
-			getClassmates();
+			getClassmates(); // om man inte kommit till bild 10 än så fortsätter spelet genom att jag kallar på getClassmates() igen
 		} 
 	};
 });
+
