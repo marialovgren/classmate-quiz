@@ -3,9 +3,9 @@
 */
 
 const buttonContainerEl = document.querySelector('.buttonContainer');
-const resultEl = document.querySelector('.result');
 const studentImgEl = document.querySelector('.studentImg');
-const cardEl = document.querySelector('.card');
+const resultEl = document.querySelector('.result');
+const resultWrapperEl = document.querySelector('.resultWrapper');
 
 
 const students = [
@@ -168,7 +168,6 @@ const students = [
 ];
 
 
-///////////////////////
 const shuffleArray = (array) => {
 	for (let i = array.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
@@ -181,6 +180,8 @@ const shuffleArray = (array) => {
 let correctStudent = "";
 
 const getClassmates = () => {
+	buttonContainerEl.innerHTML = ""; // gör så att det bara är 4 namn till varja bild. Utan denna så hade det annars adderats 4 namn till listan varje gång jag kallar på getClassmates()
+
 	shuffleArray(students); // kallar på funktionen shuffleArray som gör att alla studenter blandas och jag får en ny varje gång. 
 
 	const randomStudents = students.slice(0,4); // Jag klipper ut de 4 första studenterna i arrayn "students" med hjälp av slice. Då får jag ut de studenter som är på index 0-4. Dessa sparar jag i "randomStudents".
@@ -202,42 +203,38 @@ const getClassmates = () => {
 	});
 };
 
-// funktion för att hämta ut resultatet
-// visa resultatet som i lightbox uppgiften där själva resultat diven är satt till d-none ända tills spelet är avslutat. 
+//? funktion för att hämta ut resultatet
+//! stil i css-fil som sätter result till display none som default
 
-/*
-const getResult = () => {
-	sätt bg-warning text-black
+const getResult = (result) => {
+	resultEl.innerHTML = `<p>Ditt resultat är: ${result}</p>`
 
+	resultWrapperEl.classList.add("show");
 };
-*/
 
-/////////////////// Här börjar spelet! ///////////////
+// * HÄR BÖRJAR SPELET 
 
 getClassmates();
 
 let guesses = 0; // jag sätter gissningarna till 0 som default
+let correctGuess = 0;
 
 // jag sätter en eventlistenet på min div som heter "buttonContainer" och lyssnar efter click på BUTTON
 buttonContainerEl.addEventListener('click', e => {
 	
 	if (e.target.tagName === "BUTTON") {
 		guesses++
-
-		// if-sats som kollar om gissningen är rätt eller fel
+		
 		if (e.target.innerText === correctStudent.name) {
-			resultEl.innerText = 'Rätt!';
-		} else {
-			resultEl.innerText = 'Fel';
-		} 	
-
-		// if-sats som kollar om spelet ska fortsätta eller avslutas. En spelomgång är 10 bilder och så länge man inte kommit till bild nummer 10 så ska spelet fortsätta, annars ska spelet avslutas och resultatet ska visas. 
-		/*
+			correctGuess++
+		}
+			
+		// if-sats som kollar om gissningen är rätt eller fel. if-sats som kollar om spelet ska fortsätta eller avslutas. En spelomgång är 10 bilder och så länge man inte kommit till bild nummer 10 så ska spelet fortsätta, annars ska spelet avslutas och resultatet ska visas. 
 		if (guesses === 10) {
 			getResult();
 		} else {
 			getClassmates();
-		} */
+		} 
 	};
 });
 
