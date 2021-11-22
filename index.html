@@ -11,37 +11,47 @@
 
     <!-- Styles -->
 	<link rel="stylesheet" href="style.css">
+
+    <!-- Länk till Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Nanum+Myeongjo&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Wrapper som går runt allt innehåll på sidan -->
-    <div class="wrapper p-3 bg-white text-center">
-        <!-- Header -->
-        <div class="container mt-2 mb-2">
-            <h1 class="mb-3 text-warning display-6">Vem är detta?</h1>
+<body class="wrapper p-3 bg-white">
+            <!-- HEADER -->
+    <header>    
+        <div class="container bg-white text-center mb-2 mt-2">
+            <h1 class="text-warning display-6">Vem är detta?</h1>
         </div>
+    </header>
 
-        <!-- Här är själva spelet -->
-        <div class="quiz py-3 bg-white">
-            <div class="container">
-                <!-- card som visar bild på klasskamrat med 4 svarsalternativ -->
-                <div class="card my-2">
-                    <img class="studentImg" src="" alt="image of classmate">
-                    <div class="buttonContainer">
-                            
+            <!-- MAIN -->
+    <main>
+        <div class="container">
+            <!-- Här är själva spelet -->
+            <div class="quiz row d-flex justify-content-center">
+            <!-- card som visar bild på klasskamrat med 4 svarsalternativ -->
+                <div class="img-wrapper col-8 col-md-6">
+                    <img class="studentImg img-fluid" src="" alt="image of classmate">
+                </div>
+
+                <div class="button-wrapper col-8 col-md-6 d-flex justify-content-center">
+                    <div class="buttonContainer col-10 flex-column d-flex justify-content-center">
+                        <!-- Här inne skapas 4 knappar med namn -->            
+                     </div>
+                </div>
+                
+            </div><!-- Här slutar "quiz" -->
+        </div><!-- Här slutar "container" --> 
+    </main>
                                 
-                    </div>
-                </div>
-
-                <!-- Här visas resultatet. Är satt till display-none som default. Visas bara när man spelat klart. -->
-                <div class="result text-center">
-                        <p></p> 
-                </div>
-
-            </div> <!-- Här slutar container-diven -->
-        </div> <!-- Här slutar diven med classen quiz -->
-
-    </div> <!-- Här slutar wrappern -->
-    
+            <!-- FOOTER -->
+    <footer class="resultWrapper">
+        <!-- Här visas resultatet. Div:en är satt till display-none som default. Visas bara när man spelat klart. -->
+        <div class="result col-12 d-flex justify-content-center text-center">
+             <!-- Här inne visas resultatet -->
+        </div>
+    </footer>
 
      <!-- Script -->
      <script src="script.js"></script>

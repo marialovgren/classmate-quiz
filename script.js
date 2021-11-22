@@ -1,7 +1,7 @@
 /*
 * Inlämningsuppgift gjord av Maria Lövgren FED21M
 */
-//const cardEl = document.querySelector('.card');
+
 const buttonContainerEl = document.querySelector('.buttonContainer');
 const resultEl = document.querySelector('.result');
 const studentImgEl = document.querySelector('.studentImg');
@@ -195,7 +195,7 @@ const getClassmates = () => {
 
 	randomNames.forEach(student => {
 		buttonContainerEl.innerHTML += `
-			<button class="btn btn-dark m2">
+			<button class="btn btn-dark text-warning my-2">
 				${student}
 			</button>
 		`;
@@ -203,9 +203,14 @@ const getClassmates = () => {
 };
 
 // funktion för att hämta ut resultatet
+// visa resultatet som i lightbox uppgiften där själva resultat diven är satt till d-none ända tills spelet är avslutat. 
+
+/*
 const getResult = () => {
-	
+	sätt bg-warning text-black
+
 };
+*/
 
 /////////////////// Här börjar spelet! ///////////////
 
@@ -227,11 +232,12 @@ buttonContainerEl.addEventListener('click', e => {
 		} 	
 
 		// if-sats som kollar om spelet ska fortsätta eller avslutas. En spelomgång är 10 bilder och så länge man inte kommit till bild nummer 10 så ska spelet fortsätta, annars ska spelet avslutas och resultatet ska visas. 
-		if (guess === 10) {
+		/*
+		if (guesses === 10) {
 			getResult();
 		} else {
 			getClassmates();
-		}
+		} */
 	};
 });
 
