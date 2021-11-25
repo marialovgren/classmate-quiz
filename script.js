@@ -167,7 +167,7 @@ const students = [
 	},
 ];
 
-// funktion som jag kallar på för att slumpa fram något
+// funktion som jag kallar på för att blanda  
 const shuffleArray = (array) => {
 	for (let i = array.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
@@ -186,13 +186,13 @@ let correctStudent = ""; // correctStudent är satt till en tom sträng för att
 
 // denna funktionen kallar jag på när jag vill generera en ny bild och 4 namn
 const getClassmates = () => {
-	quizEl.classList.remove("d-none"); // tar bort klassen display none som jag sätter på bild och namn när jag ska visa resultatet. 
+	quizEl.classList.remove("d-none"); // tar bort klassen display none som jag sätter på bild och namn när jag ska visa resultatet.  
 
 	buttonContainerEl.innerHTML = ""; // gör så att det bara är 4 namn till varja bild. Utan denna så hade det annars adderats 4 namn till listan varje gång jag kallar på getClassmates()
 
 	shuffleArray(students); // kallar på funktionen shuffleArray som gör att alla studenter blandas och jag får en ny version av students varje gång. 
 
-	const randomStudents = students.slice(0,4); // Jag tar ut de 4 första studenterna i arrayn "students" med hjälp av slice. Då får jag ut de studenter som är på index 0-4. Dessa sparar jag i "randomStudents".
+	const randomStudents = students.slice(0,4); // Jag tar ut de 4 första studenterna i arrayn "students" med hjälp av slice. Eftersom jag blandat arrayn redan med shuffleArray så får jag ut en ny lista varje gång och då blir också de 4 första eleverna olika varje gång. Jag ut de studenter som är på index 0-4. Dessa sparar jag i "randomStudents".
 
 	correctStudent = students[0]; // efter att jag blandat alla studenter så sätter jag correctStudent till den är som är på index 0 i arrayn student
 
@@ -214,7 +214,7 @@ const getClassmates = () => {
 
 // funktion för att hämta ut resultatet
 const getResult = () => {
-	quizEl.classList.add("d-none"); // sätter bild och namn till display-none så att bara resultatet kan visas
+	quizEl.classList.add("d-none"); // sätter bild och namn till display-none så att bara resultatet kan visas över hela skärmen.
 
 	resultWrapperEl.classList.remove("resultWrapper"); // ta bort klassen resultWrapper för att få bort lightbox-stilen på resultat-delen
 
@@ -236,8 +236,6 @@ const playAgain = () => {
 	getClassmates(); // kallar på funktionen som skapar bild och 4 namn
 }
 
-// * HÄR BÖRJAR SPELET 
-
 getClassmates();
 
 // jag sätter en eventlistener på min div som heter "buttonContainer" och lyssnar efter click på BUTTON
@@ -253,9 +251,9 @@ buttonContainerEl.addEventListener('click', e => {
 		// En spelomgång är 10 bilder. Om man kommit till bild 10 så ska en knapp med "visa resultat" komma upp. 
 		if (guesses === 10) {
 			wrongGuess = guesses - correctGuess; // uträkning för att få fram antalet felgissningar
-			resultWrapperEl.classList.add("show"); // lägger till klassen "show" som visar resultat-delen
+			resultWrapperEl.classList.add("show"); // lägger till klassen "show" som visar resultat-delen när man gissat 10 gånger
 
-			resultWrapperEl.classList.add("resultWrapper"); // lägger till klassen "resultWrapper" för att "visa resultat" knappen ska komma upp även efter en spelomgång
+			resultWrapperEl.classList.add("resultWrapper"); // lägger till klassen "resultWrapper" för att "visa resultat" knappen ska fortsätta komma upp och inte bara visas efter första spelomgången. 
 			
 			// när man klickar på "visa resultat" så kallar jag på funktionen getResult() med hjälp av onclick
 			resultEl.innerHTML = `
