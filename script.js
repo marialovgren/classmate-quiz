@@ -6,6 +6,7 @@ const studentImgEl = document.querySelector('.studentImg');
 const buttonContainerEl = document.querySelector('.buttonContainer');
 const resultEl = document.querySelector('.result');
 const resultWrapperEl = document.querySelector('.resultWrapper');
+const quizEl = document.querySelector('.quiz');
 
 const students = [
 	{
@@ -185,6 +186,8 @@ let correctStudent = ""; // correctStudent är satt till en tom sträng för att
 
 // denna funktionen kallar jag på när jag vill generera en ny bild och 4 namn
 const getClassmates = () => {
+	quizEl.classList.remove("d-none"); // tar bort klassen display none som jag sätter på bild och namn när jag ska visa resultatet. 
+
 	buttonContainerEl.innerHTML = ""; // gör så att det bara är 4 namn till varja bild. Utan denna så hade det annars adderats 4 namn till listan varje gång jag kallar på getClassmates()
 
 	shuffleArray(students); // kallar på funktionen shuffleArray som gör att alla studenter blandas och jag får en ny version av students varje gång. 
@@ -211,7 +214,11 @@ const getClassmates = () => {
 
 // funktion för att hämta ut resultatet
 const getResult = () => {
-	resultEl.innerHTML = `<p>Du fick ${correctGuess} rätt och ${wrongGuess} fel.</p><br> 
+	quizEl.classList.add("d-none"); // sätter bild och namn till display-none så att bara resultatet kan visas
+
+	resultWrapperEl.classList.remove("resultWrapper"); // ta bort klassen resultWrapper för att få bort lightbox-stilen på resultat-delen
+
+	resultEl.innerHTML = `<p class="d-block">Du fick ${correctGuess} rätt och ${wrongGuess} fel av totalt ${guesses} gissningar.</p> 
 	<button onclick="playAgain()" class="btn btn-dark text-warning my-2">
 				Spela igen
 			</button>`;  
@@ -220,7 +227,11 @@ const getResult = () => {
 // funktion som startar en ny spelomgång
 const playAgain = () => {
 	resultEl.innerHTML = ""; // tömmer innehåller i resultat-delen
-	guesses = 0; // tömmer räknaren
+	
+	// tömmer räknaren
+	guesses = 0; 
+	correctGuess = 0;
+	wrongGuess = 0;
 
 	getClassmates(); // kallar på funktionen som skapar bild och 4 namn
 }
@@ -228,11 +239,6 @@ const playAgain = () => {
 // * HÄR BÖRJAR SPELET 
 
 getClassmates();
-
-resultEl.innerHTML = ""; // tömmer platsen där resultatet ska visas så att när man klickar på "spela igen" så försvinner resultatet.
-
-
-
 
 // jag sätter en eventlistener på min div som heter "buttonContainer" och lyssnar efter click på BUTTON
 buttonContainerEl.addEventListener('click', e => {
@@ -247,7 +253,9 @@ buttonContainerEl.addEventListener('click', e => {
 		// En spelomgång är 10 bilder. Om man kommit till bild 10 så ska en knapp med "visa resultat" komma upp. 
 		if (guesses === 10) {
 			wrongGuess = guesses - correctGuess; // uträkning för att få fram antalet felgissningar
-			resultWrapperEl.classList.add("show");
+			resultWrapperEl.classList.add("show"); // lägger till klassen "show" som visar resultat-delen
+
+			resultWrapperEl.classList.add("resultWrapper"); // lägger till klassen "resultWrapper" för att "visa resultat" knappen ska komma upp även efter en spelomgång
 			
 			// när man klickar på "visa resultat" så kallar jag på funktionen getResult() med hjälp av onclick
 			resultEl.innerHTML = `

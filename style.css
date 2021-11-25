@@ -2,6 +2,19 @@
  * result styles
 **/
 
-#resultWrapper.show {
+.resultWrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #000000cc; 
+	display: none;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem 3rem;
+}
+
+.resultWrapper.show {
 	display: flex;
 }
