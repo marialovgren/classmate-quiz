@@ -36,4 +36,4 @@ An array with students where provided by our teacher and we where not allowed to
 
 
 ## Screenshot
-![Guess the student](https://github.com/marialovgren/classmate-quiz/blob/ed017098dda0f8f94cf558c39dfbf3cba471dff1/students/assets/images/Screenshot%202021-12-20%20at%2015.08.36.png
+![Guess the student](https://github.com/marialovgren/classmate-quiz/blob/ed017098dda0f8f94cf558c39dfbf3cba471dff1/students/assets/images/Screenshot%202021-12-20%20at%2015.08.36.png)
