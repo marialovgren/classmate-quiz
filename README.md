@@ -3,7 +3,7 @@
 Created a [guessing game](https://maria-lovgren-students-quiz.netlify.app) based on classmates using:
 - HTML
 - CSS
-- JavaScript
+- Vanilla JavaScript
 - Bootstrap 5
 
 
